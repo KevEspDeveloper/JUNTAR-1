@@ -16,6 +16,7 @@ use yii\db\ActiveRecord;
  * @property string|null $pais
  * @property string|null $provincia
  * @property string|null $localidad
+ * @property string $clave_publica
  *
  * @property Evento[] $eventos
  * @property Expositor[] $expositors
@@ -88,7 +89,11 @@ class Usuario extends ActiveRecord
             ],
 
             //Reglas DNI
-            ['dni', 'integer', 'min' => 10000000, 'max' => 100000000]
+            ['dni', 'integer', 'min' => 10000000, 'max' => 100000000],
+
+            //reglas clave publica
+            [['clave_publica'], 'string', 'max' => 300],
+            [['clave_publica'], 'unique']
         ];
     }
 

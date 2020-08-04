@@ -196,7 +196,8 @@ CREATE TABLE `usuario` (
   `status` smallint(6) NOT NULL DEFAULT 9,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
-  `verification_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `verification_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  /*url al archivo de clave publica */ `clave_publica` varchar(300)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -586,6 +587,7 @@ INSERT INTO `permiso` (`name`, `type`, `description`, `rule_name`, `data`, `crea
 ('acreditacion/acreditacion', 2, 'FRONTEND [Registrado] - Permite a un usuario acreditarse a un evento', NULL, NULL, 1593652530, 1593652530),
 ('Administrador', 1, 'Rol - Superusuario Administrador', NULL, NULL, 1590382997, 1590382997),
 ('certificado/index', 2, 'FRONTEND [Registrado] - Permite visualizar el menú de certificados', NULL, NULL, 1593652754, 1593652754),
+('certificado/firmar-certificado', 2, 'FRONTEND [Organizador] - Permite firmar certificados', NULL, NULL, 1593652754, 1593652754),
 ('certificado/preview-attendance', 2, 'FRONTEND [Registrado] - Permite visualizar el certificado de asistencia a un evento', NULL, NULL, 1593652801, 1593652801),
 ('certificado/preview-organizer', 2, 'FRONTEND [Organizador] - Permite visualizar el certificado de Organizador del evento', NULL, NULL, 1593652824, 1593652824),
 ('cuenta/cambiar-email', 2, 'FRONTEND [Registrado] - Permite cambiar el email de la cuenta a partir del token enviado al correo', NULL, NULL, 1593652391, 1593652391),
@@ -750,6 +752,7 @@ INSERT INTO `permiso_rol` (`parent`, `child`) VALUES
 ('Organizador', 'presentacion/delete'),
 ('Organizador', 'presentacion/update'),
 ('Organizador', 'Registrado'),
+('Organizador', 'certificado/firmar-certificado'),
 ('Registrado', 'acreditacion/acreditacion'),
 ('Registrado', 'certificado/index'),
 ('Registrado', 'certificado/preview-attendance'),

@@ -333,6 +333,47 @@ class CuentaController extends Controller
     }
 
     /**
+    * Cambia el archivo de clave publica
+    */
+
+    public function actionSubirClavePublica()
+    {
+        //Siempre que quieras editar data, asegurate que el modelo defina reglas de validación para todos los campos afectados
+        $model = new Usuario();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->profileImage = UploadedFile::getInstance($model, 'profileImage');
+
+            if ($model->profileImage != null) {
+                if ($model->upload()) {
+                    Yii::$app->session->setFlash('success', '<h2> Datos Actualizados </h2>'
+                        . '<p> ¡Tu perfil ha sido actualizado correctamente! </p>');
+                } else {
+                    Yii::$app->session->setFlash('error', '<h2> Algo salió mal ): </h2>'
+                        . '<p> No pudimos actualizar tu imagen de perfil. </p>');
+                }
+            } else {
+                Yii::$app->session->setFlash('error', '<h2> Campo vacío </h2>'
+                    . '<p> No ingresó ninguna imagen. </p>');
+            }
+
+            return $this->redirect(['profile']);
+        }
+
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('uploadProfileImage', [
+                'model' => $model,
+            ]);
+        } else {
+            return $this->render('uploadProfileImage', [
+                'model' => $model,
+            ]);
+        }
+    }
+    
+
+
+    /**
      * solicita cambio de email
      *
      */
