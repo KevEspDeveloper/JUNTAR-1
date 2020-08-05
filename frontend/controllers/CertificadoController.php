@@ -17,6 +17,17 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\response;
 
+//uso de librería de firma digital
+use frontend\models\firma\Autenticacion;
+use frontend\models\firma\Autochequeo;
+use frontend\models\firma\CertificadoFirma;
+use frontend\models\firma\Exceptions;
+use frontend\models\firma\FirmaElectronica;
+use frontend\models\firma\libreria;
+use frontend\models\firma\Logger;
+use frontend\models\firma\Messages;
+use frontend\models\firma\Singleton;
+
 /**
  * CertificadoController.
  */
@@ -228,6 +239,30 @@ class CertificadoController extends Controller
                 'message' => 'Se ha provocado un error en la solicitud del certificado.'
             ]);
         }
+    }
+
+    /**
+     * Método para el formulario de firmar un certificado
+     * 
+     * @return mixed
+     */
+    public function actionFormFirmarCertificado(){
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        return $this->render('form-firmar-certificado', [
+            'name' => 'Certificado',
+        ]);
+    }
+
+    /**
+     * Método de procesamiento de la firma del certificado
+     * 
+     * @return mixed
+     */
+    public function actionFirmaCertificado(){
+        
     }
 
 }
