@@ -1,11 +1,13 @@
 <?php
+namespace frontend\models;
 
-include_once 'firma/Autenticacion.php';
-include_once 'firma/Autochequeo.php';
-include_once 'firma/FirmaElectronica.php';
-include_once 'firma/Exceptions.php';
-include_once 'firma/CertificadoFirma.php';
-include_once 'firma/Logger.php';
+namespace frontend\models\firma;
+include_once '../models/firma/Autenticacion.php';
+include_once '../models/firma/Autochequeo.php';
+include_once '../models/firma/FirmaElectronica.php';
+include_once '../models/firma/Exceptions.php';
+include_once '../models/firma/CertificadoFirma.php';
+include_once '../models/firma/Logger.php';
 
 
 class Libreria{

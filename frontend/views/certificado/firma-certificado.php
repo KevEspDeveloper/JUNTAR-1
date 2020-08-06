@@ -1,7 +1,6 @@
 <?php
 
 use yii\bootstrap4\ActiveForm;
-use yii\helpers\Url;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -37,7 +36,13 @@ $this->title = "Firmar Certificado";
 </head>
 
 <body>
-
+    <!-- Contenido de la pagina -->
+    <div class="container">
+        <div class="row">
+            
+        </div>
+        <!-- /.row -->
+    </div>
     <!-- /.container -->
 <div class="container text-center">
     
@@ -55,40 +60,29 @@ $this->title = "Firmar Certificado";
 
                 <hr>
 
-                <!-- -->
+                <form name="formulario" enctype="multipart/form-data" action="firmar-certificado" method="POST">
+                    <label for="inputFile">Archivo</label>
+                    <div class="custom-file mb-5">
+                        <input required name="uploadedfile" type="file" class="custom-file-input" id="inputFile">
+                        <label class="custom-file-label" for="customFile">Suba el certificado que desea firmar.</label>
+                    </div>
 
-                <?= Html::beginForm(
-                    Url::toRoute("certificado/firma-certificado"), //action
-                    "get", //method
-                    ['class' => 'form'] //options
-                );
-                ?>
+                    <label for="uploadedprivkey">Clave privada</label>
+                    <div class="custom-file mb-5">
+                        <input required name="uploadedprivkey" type="file" class="custom-file-input" id="inputFile">
+                        <label class="custom-file-label" for="customFile">Archivo de Clave Privada para firmar el certificado.</label>
+                    </div>
 
-                <div class="form-group">
-                    <?= Html::label('Archivo', 'inputFile') ?>
-                    <?= Html::fileInput('uploadedfile', null, ['class' => 'form-control', 'required' => true]) ?>
-                </div>
+                    <div >
+                        <label for="inputPassword">Contraseña</label>
+                        <input name="uploadedpassword" type="password" class="form-control" id="inputPassword" placeholder="Ingrese aquí la contraseña de la clave privada (si posee una).">
+                        <p class="help-block">Contraseña de la Llave Privada (opcional).</p>
+                    </div>           
 
-                <div class="form-group">
-                    <?= Html::label('Clave Privada', 'uploadedprivkey') ?>
-                    <?= Html::fileInput('uploadedprivkey', null, ['class' => 'form-control', 'required' => true]) ?>
-                </div>
+                    <input class="btn btn-default btn-lg" name="enviar" type="submit" value="Firmar Certificado"/>
+                </form>
 
-                <div class="form-group">
-                    <?= Html::label('Contraseña de la clave privada', 'inputPassword') ?>
-                    <?= Html::passwordInput('uploadedpassword', null, ['class' => 'form-control', 'id' => 'inputPassword', 'placeholder' => 'Ingrese la contraseña de la clave privada (si no tiene contraseña, deje vacío este campo).']) ?>
-                </div>
-
-                <?= Html::submitInput('Firmar Certificado', ['class' => 'btn btn-default my-5 py-3']) ?>
-
-                <?= Html::endForm() ?>
-
-
-                <p class="text-center">
-                    <?= $mensaje ?>
-                </p>
-
-                <!-- -->
+                <!-- Standard button -->
             </div>           
 
 
