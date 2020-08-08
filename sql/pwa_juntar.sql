@@ -280,6 +280,19 @@ CREATE TABLE `imagen_evento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+--
+-- Estructura de tabla para la tabla 'certificado_firma'
+--
+
+CREATE TABLE `certificado_firma` (
+  `idFirma` bigint(20) NOT NULL,
+  'idInscripcion' bigint(20) NOT NULL,
+  `urlArchivo` varchar(200),
+  `urlClavePrivada` varchar(200),
+  `urlCertificado` varchar(200)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 -- #######################################################################################################################
 -- #######################################################################################################################
 --
