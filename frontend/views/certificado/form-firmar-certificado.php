@@ -57,12 +57,22 @@ $this->title = "Firmar Certificado";
 
                 <!-- -->
 
-                <?= Html::beginForm(
+                <?php /*Html::beginForm(
                     Url::toRoute("certificado/firma-certificado"), //action
-                    "get", //method
+                    "post", //method
                     ['class' => 'form'] //options
-                );
+                );*/
                 ?>
+
+                <?php $form = ActiveForm::begin([
+                    'method' => 'post',
+                    'enableClientValidation' => true,
+                    'options' => ['enctype' => 'multipart/form-data'],
+                ]);
+
+                ?>
+
+                <?= $form->field($model, 'file[]')->fileInput(['multiple' => false]) ?>
 
                 <div class="form-group">
                     <?= Html::label('Archivo', 'inputFile') ?>
@@ -86,6 +96,13 @@ $this->title = "Firmar Certificado";
 
                 <p class="text-center">
                     <?= $mensaje ?>
+
+                    <?php
+                    /*for ($i=0; $i < count($datos); $i++) { 
+                        echo "<br>".$datos[$i];
+                    }*/
+                    print_r($_FILES);
+                    ?>
                 </p>
 
                 <!-- -->

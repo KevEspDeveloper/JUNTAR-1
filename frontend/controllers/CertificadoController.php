@@ -247,14 +247,15 @@ class CertificadoController extends Controller
      * 
      * @return mixed
      */
-    public function actionFormFirmarCertificado($mensaje = null){
+    public function actionFormFirmarCertificado($mensaje = null, $files = null){
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         return $this->render('form-firmar-certificado', [
             'name' => 'Certificado',
-            'mensaje' => $mensaje
+            'mensaje' => $mensaje,
+            'files' => $files
         ]);
     }
 
@@ -267,28 +268,27 @@ class CertificadoController extends Controller
     public function actionFirmaCertificado(){
 
         $mensaje = "";
-
-        if (isset($_REQUEST['uploadedfile']) && isset($_REQUEST['uploadedprivkey']) && isset($_REQUEST['uploadedpassword'])){
+        if (isset($_FILES)){
 
             error_reporting(E_ALL & ~E_NOTICE);
             ini_set("display_errors", 1);
 
-            $target_path = "web/certificados/";
-            $target_path = $target_path . basename( $_FILES['uploadedfile']['name']);
-            $archivo_upload = basename( $_FILES['uploadedfile']['name']);
-            if(move_uploaded_file($_REQUEST['uploadedfile'], $target_path)) {
+            $target_path = "certificados/";
+            $target_path = $target_path . basename( $_FILES['uploadedfile']);
+            $archivo_upload = basename( $_FILES['uploadedfile']);
+            if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
                 //echo "El archivo ". basename( $_FILES['uploadedfile']['name']). " ha sido subido"."<br>";
                 $mensaje = "El archivo ". $archivo_upload. " ha sido firmado y subido!<br>";
             }else{
                 //echo "Ha ocurrido un error, trate de nuevo!"."<br>";
-                $mensaje = "Ha ocurrido un error al subir el archivo ".$_REQUEST['uploadedfile'].", trate de nuevo!"."<br>";
+                $mensaje = "Ha ocurrido un error al subir el archivo ".$_FILES['uploadedfile'].", trate de nuevo!"."<br>";
             }
 
                 $target_path = "./";
-                $target_path = $target_path . basename( $_FILES['uploadedprivkey']['name']);
-                $llave_privada = basename( $_FILES['uploadedprivkey']['name']);
-                if(move_uploaded_file($_FILES['uploadedprivkey']['tmp_name'], $target_path)) {
-                    echo "El archivo ". basename( $_FILES['uploadedprivkey']['name']). " ha sido subido"."<br>";
+                $target_path = $target_path . basename( $_FILES['uploadedprivkey']);
+                $llave_privada = basename( $_FILES['uploadedprivkey']);
+                if(move_uploaded_file($_FILES['uploadedprivkey'], $target_path)) {
+                    echo "El archivo ". basename( $_FILES['uploadedprivkey']). " ha sido subido"."<br>";
                     $mensaje .= "<br> El archivo ". $llave_privada. " ha sido subido"."<br>";
                 }else{
                     echo "Ha ocurrido un error, trate de nuevo!"."<br>";
@@ -298,7 +298,7 @@ class CertificadoController extends Controller
                 $pass_llave = $_POST['uploadedpassword'];
 
         }else{
-            $mensaje = "NO se han enviado los datos correctamente";
+            $mensaje = "NO se han enviado los datos correctamente.";
         }
                     
         
@@ -350,7 +350,7 @@ class CertificadoController extends Controller
             echo "<a href='./certificado.sig'> Archivo Con La Firma</a>";
             echo "<a href='./".$archivo_upload."'> Tu Archivo </a>";*/
 
-            $this->redirect(["certificado/form-firmar-certificado", "mensaje" => $mensaje]);
+            $this->redirect(["certificado/form-firmar-certificado", "mensaje" => $mensaje, 'files' => $_FILES]);
     }
 
     
