@@ -64,6 +64,8 @@ $this->title = "Firmar Certificado";
                 );*/
                 ?>
 
+
+<!-- begin Formulario -->
                 <?php $form = ActiveForm::begin([
                     'method' => 'post',
                     'enableClientValidation' => true,
@@ -92,6 +94,9 @@ $this->title = "Firmar Certificado";
                 <?= Html::submitInput('Firmar Certificado', ['class' => 'btn btn-default my-5 py-3']) ?>
 
                 <?= Html::endForm() ?>
+
+
+                <!-- fin Formulario -->
 
 
                 <p class="text-center">
