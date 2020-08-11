@@ -1,4 +1,7 @@
 <?php
+
+namespace frontend\models\firma;
+
 /**
  * 
  * @filename FirmaElectronica.php
@@ -7,7 +10,7 @@
  * a la funcionalidad del servidor, solo tiene sentido las funcionalidades
  * de firma asociadas por interoperatividad. 
  */
-include_once "Exceptions.php";
+use frontend\models\firma\Exceptions;
 /**
  * Contiene las funcionalidades relativas al firmado. Al estar orientado
  * a la funcionalidad del servidor, solo tiene sentido las funcionalidades

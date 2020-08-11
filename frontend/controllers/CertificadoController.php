@@ -231,6 +231,22 @@ class CertificadoController extends Controller
         }
     }
 
+
+    /**
+     * 2020
+     * Vista del dialogo easter egg
+     */
+    public function actionQueHaPasao($fecha = null, $nombre = null)
+    {
+
+        /* Descomentar $nombre = 'rosecrimson' para ver el dialogo en la página */
+        //$nombre = 'rosecrimson';
+        $fecha = "09/agosto/2020";
+
+
+        return $this->render('/certificado/queHaPasao', ['fecha' => $fecha, 'nombre' => $nombre]);
+    }
+
     
 }
 

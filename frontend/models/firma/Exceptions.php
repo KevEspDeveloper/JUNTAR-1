@@ -1,10 +1,11 @@
 <?php
+namespace frontend\models\firma;
 /**
  * 
  * @filename Exceptions.php
  *  Excepciones que permiten identificar los posibles errores del Framework
  */
-include_once 'Messages.php';
+use frontend\models\firma\Messages;
 
 class UnknownException extends Exception {};
 class RevokedException extends Exception {};

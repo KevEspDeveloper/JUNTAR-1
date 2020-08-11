@@ -1,11 +1,14 @@
 <?php
+
+namespace frontend\models\firma;
+
 /**
  * 
  * @filename Logger.php
  * Enviar logs al sistema. 
  */
-include_once 'Singleton.php';
-include_once 'Messages.php';
+use frontend\models\firma\Singleton;
+use frontend\models\firma\Messages;
 
 class Logger extends Singleton {
     const INFO = "2";

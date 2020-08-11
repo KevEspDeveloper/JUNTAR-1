@@ -281,15 +281,15 @@ CREATE TABLE `imagen_evento` (
 
 
 --
--- Estructura de tabla para la tabla 'certificado_firma'
+-- Estructura de tabla para la tabla 'firma_digital'
 --
 
-CREATE TABLE `certificado_firma` (
+CREATE TABLE `firma_digital` (
   `idFirma` bigint(20) NOT NULL,
-  'idInscripcion' bigint(20) NOT NULL,
-  `urlArchivo` varchar(200),
-  `urlClavePrivada` varchar(200),
-  `urlCertificado` varchar(200)
+  `archivo` varchar(200) NOT NULL,
+  `clavePrivada` varchar(200),
+  `sig` varchar(200) NOT NULL,
+  `passClavePrivada` varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -298,6 +298,13 @@ CREATE TABLE `certificado_firma` (
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `firma_digital`
+--
+ALTER TABLE `firma_digital`
+  ADD PRIMARY KEY (`idFirma`);
+
 
 --
 -- Indices de la tabla `categoria_evento`
@@ -600,7 +607,7 @@ INSERT INTO `permiso` (`name`, `type`, `description`, `rule_name`, `data`, `crea
 ('acreditacion/acreditacion', 2, 'FRONTEND [Registrado] - Permite a un usuario acreditarse a un evento', NULL, NULL, 1593652530, 1593652530),
 ('Administrador', 1, 'Rol - Superusuario Administrador', NULL, NULL, 1590382997, 1590382997),
 ('certificado/index', 2, 'FRONTEND [Registrado] - Permite visualizar el menú de certificados', NULL, NULL, 1593652754, 1593652754),
-('certificado/firmar-certificado', 2, 'FRONTEND [Organizador] - Permite firmar certificados', NULL, NULL, 1593652754, 1593652754),
+('certificado/que-ha-pasao', 2, '[FRONTEND] - Easter egg Kevin Espinoza. Un pequeño desahogo. Página oculta.', NULL, NULL, 1593650681, 1593650681),
 ('certificado/preview-attendance', 2, 'FRONTEND [Registrado] - Permite visualizar el certificado de asistencia a un evento', NULL, NULL, 1593652801, 1593652801),
 ('certificado/preview-organizer', 2, 'FRONTEND [Organizador] - Permite visualizar el certificado de Organizador del evento', NULL, NULL, 1593652824, 1593652824),
 ('cuenta/cambiar-email', 2, 'FRONTEND [Registrado] - Permite cambiar el email de la cuenta a partir del token enviado al correo', NULL, NULL, 1593652391, 1593652391),
@@ -678,7 +685,7 @@ INSERT INTO `permiso` (`name`, `type`, `description`, `rule_name`, `data`, `crea
 ('rol/ver-rol', 2, 'BACKEND [Administrador] - Permite visualizar la información de un rol', NULL, NULL, 1593651450, 1593651450),
 ('site/index', 2, 'Permite al usuario acceder al home de la plataforma', NULL, NULL, 1593649035, 1593649035),
 ('site/login', 2, 'Permite a un usuario iniciar sesión en la plataforma', NULL, NULL, 1593650681, 1593650681),
-('site/logout', 2, 'Permite a un usuario cerrar sesión en la plataforma', NULL, NULL, 1593650703, 1593650703),
+('site/logout', 2, 'Permite a un usuario cerrar sesión en la plataforma', NULL, NULL, 1593650703, 1593650703), 
 ('solicitud-aval/conceder-aval', 2, 'BACKEND [Administrador] - Permite conceder el aval de la FAI a un evento', NULL, NULL, 1593651320, 1593651320),
 ('solicitud-aval/quitar-aval', 2, 'BACKEND [Administrador] - Permite quitar el aval de la FAI a un evento', NULL, NULL, 1593651333, 1593651333),
 ('solicitud-aval/solicitudes-de-aval', 2, 'BACKEND [Administrador] - Permite visualizar el listado de todas las solicitudes de aval de los eventos en Juntar', NULL, NULL, 1593651291, 1593651291),
@@ -765,7 +772,7 @@ INSERT INTO `permiso_rol` (`parent`, `child`) VALUES
 ('Organizador', 'presentacion/delete'),
 ('Organizador', 'presentacion/update'),
 ('Organizador', 'Registrado'),
-('Organizador', 'certificado/firmar-certificado'),
+('Organizador', 'certificado/que-ha-pasao'),
 ('Registrado', 'acreditacion/acreditacion'),
 ('Registrado', 'certificado/index'),
 ('Registrado', 'certificado/preview-attendance'),

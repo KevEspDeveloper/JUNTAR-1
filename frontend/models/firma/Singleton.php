@@ -1,4 +1,7 @@
 <?php
+
+namespace frontend\models\firma;
+
 /**
  * 
  * @filename Singleton.php

@@ -1,5 +1,5 @@
 <?php
-
+namespace frontend\models\firma;
 /**
  * 
  * @filename CertificadoFirma.php

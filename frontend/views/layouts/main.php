@@ -74,7 +74,7 @@ AppAsset::register($this);
 
                     ['label' => 'Organizar Eventos', 'url' => ['/evento/organizar-eventos']],
 
-                    ['label' => 'Firmar Certificado', 'url' => ['/certificado/form-firmar-certificado']],
+                    ['label' => 'Firmar Certificado', 'url' => ['/firma-digital/form-firmar-certificado']],
 
                     ['label' => 'Mis Inscripciones', 'url' => ['/cuenta/mis-inscripciones-a-eventos']],
                     [

@@ -1,4 +1,7 @@
 <?php
+
+namespace frontend\models\firma;
+
 /**
  * 
  * @filename Autochequeo.php
@@ -6,8 +9,9 @@
  * La clase autocheque contiene las caracteristicas correspondientes al
  * autochequeo del sistema.
  */
-include_once 'Exceptions.php';
-include_once 'Logger.php';
+
+use frontend\models\firma\Exceptions;
+use frontend\models\firma\Logger;
 
 /**
  * La clase autocheque contiene las caracteristicas correspondientes al
@@ -27,8 +31,8 @@ class Autochequeo {
 
         if (strnatcmp(phpversion(),'5.3') < 0)
         {
-            Logger::getInstance()->log("Versión de PHP inferior a 5.3: ".phpversion(), Logger::ERROR);
-            throw new AutochequeoException("Versión de PHP inferior a 5.3");
+            Logger::getInstance()->log("Versiï¿½n de PHP inferior a 5.3: ".phpversion(), Logger::ERROR);
+            throw new AutochequeoException("Versiï¿½n de PHP inferior a 5.3");
         }
         if (!function_exists('openssl_open')) {
             Logger::getInstance()->log("No se encuentra openssl, debe instalarse la libreria en PHP (comprueba extensiones en php.ini).", Logger::ERROR);

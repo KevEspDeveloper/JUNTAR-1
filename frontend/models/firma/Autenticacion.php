@@ -1,5 +1,7 @@
 <?php
 
+namespace frontend\models\firma;
+
 /**
  * 
  * @filename Autenticacion.php
@@ -10,7 +12,7 @@
  * el resto de entornos.
  */
 
-include_once 'Exceptions.php';
+use frontend\models\firma\Exceptions;
 
 /**
  * Clase que contiene las funcionalidades de autenticacion
