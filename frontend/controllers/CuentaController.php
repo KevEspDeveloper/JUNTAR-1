@@ -436,4 +436,6 @@ class CuentaController extends Controller
         return $this->redirect(['/cuenta/profile']);
     }
 
+    
+
 }

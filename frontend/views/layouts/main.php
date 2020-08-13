@@ -11,6 +11,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 
+use frontend\controllers\FirmaDigitalController;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -49,6 +51,15 @@ AppAsset::register($this);
             $menuItems[] = ['label' => 'Registrarse', 'url' => ['/site/signup']];
             $menuItems[] = ['label' => 'Ingresar', 'url' => ['/site/login']];
         } else {
+
+            /* Logica para ver si el usuario creó algun evento alguna vez y poder firmar certificados */
+                $idUsuario = Yii::$app->user->identity->idUsuario;
+                $organizoAlgunEvento = FirmaDigitalController::organizoAlgunEvento($idUsuario);
+
+            /* Logica para ver si el usuario participó de algun evento alguna vez y poder verificar certificados */
+                $idUsuario = Yii::$app->user->identity->idUsuario;  
+                $participoEnAlgunEvento = FirmaDigitalController::participoEnAlgunEvento($idUsuario);
+
             // Opciones solo para usuario con rol organizador 
             if (Yii::$app->user->can('Organizador')) {
 
@@ -63,29 +74,92 @@ AppAsset::register($this);
             } else {
                 $imgPerfil = '@web/iconos/person-circle-w.svg';
             }
-            $menuItems[] = [
-                'label' => Html::img($imgPerfil, ['class' => 'ml-1', "alt" => "Cuenta", "width" => "35", "height" => "30", "title" => "Cuenta", "role" => "img", "style" => "margin: -4px 8px 0 0; border-top-left-radius: 50% 50%;
-  border-top-right-radius: 50% 50%;
-  border-bottom-right-radius: 50% 50%;
-  border-bottom-left-radius: 50% 50%;"]),
-                'items' => [
-                    ['label' => Yii::$app->user->identity->nombre . ' ' . Yii::$app->user->identity->apellido],
-                    ['label' => 'Mi Perfil', 'url' => ['/cuenta/profile'], 'linkOptions' => ['class' => 'yolo']],
 
-                    ['label' => 'Organizar Eventos', 'url' => ['/evento/organizar-eventos']],
+            /* Se permitirá firmar certificados si el usuario ha creado al menos 1 evento y si 
+            ese evento se encuentra finalizado */
+            if ($organizoAlgunEvento != false) {
+                $menuItems[] = [
+                    'label' => Html::img($imgPerfil, ['class' => 'ml-1', "alt" => "Cuenta", "width" => "35", "height" => "30", "title" => "Cuenta", "role" => "img", "style" => "margin: -4px 8px 0 0; border-top-left-radius: 50% 50%;
+                        border-top-right-radius: 50% 50%;
+                        border-bottom-right-radius: 50% 50%;
+                        border-bottom-left-radius: 50% 50%;"]),
+                    'items' => [
+                        ['label' => Yii::$app->user->identity->nombre . ' ' . Yii::$app->user->identity->apellido],
+                        ['label' => 'Mi Perfil', 'url' => ['/cuenta/profile'], 'linkOptions' => ['class' => 'yolo']],
+    
+                        ['label' => 'Organizar Eventos', 'url' => ['/evento/organizar-eventos']],
+    
+                        ['label' => 'Firmar Certificado', 'url' => ['/firma-digital/form-firmar-certificado']],
 
-                    ['label' => 'Firmar Certificado', 'url' => ['/firma-digital/form-firmar-certificado']],
-
-                    ['label' => 'Mis Inscripciones', 'url' => ['/cuenta/mis-inscripciones-a-eventos']],
-                    [
-                        "label" => "Cerrar Sesión",
-                        "url" => ["/site/logout"],
-                        "linkOptions" => [
-                            "data-method" => "post",
-                        ]
+                        ['label' => 'Verificar Certificado', 'url' => ['/firma-digital/form-verificar-certificado']],
+    
+                        ['label' => 'Mis Inscripciones', 'url' => ['/cuenta/mis-inscripciones-a-eventos']],
+                        [
+                            "label" => "Cerrar Sesión",
+                            "url" => ["/site/logout"],
+                            "linkOptions" => [
+                                "data-method" => "post",
+                            ]
+                        ],
                     ],
-                ],
-            ];
+                ];
+            }elseif ($participoEnAlgunEvento != false) {
+                $menuItems[] = [
+                    'label' => Html::img($imgPerfil, ['class' => 'ml-1', "alt" => "Cuenta", "width" => "35", "height" => "30", "title" => "Cuenta", "role" => "img", "style" => "margin: -4px 8px 0 0; border-top-left-radius: 50% 50%;
+                        border-top-right-radius: 50% 50%;
+                        border-bottom-right-radius: 50% 50%;
+                        border-bottom-left-radius: 50% 50%;"]),
+                    'items' => [
+                        ['label' => Yii::$app->user->identity->nombre . ' ' . Yii::$app->user->identity->apellido],
+                        ['label' => 'Mi Perfil', 'url' => ['/cuenta/profile'], 'linkOptions' => ['class' => 'yolo']],
+    
+                        ['label' => 'Organizar Eventos', 'url' => ['/evento/organizar-eventos']],
+
+                        ['label' => 'Verificar Certificado', 'url' => ['/firma-digital/form-verificar-certificado']],
+    
+                        ['label' => 'Mis Inscripciones', 'url' => ['/cuenta/mis-inscripciones-a-eventos']],
+                        
+                        
+                        
+                        
+                        [
+                            "label" => "Cerrar Sesión",
+                            "url" => ["/site/logout"],
+                            "linkOptions" => [
+                                "data-method" => "post",
+                            ]
+                        ],
+                    ],
+                ];
+            }else{
+                $menuItems[] = [
+                    'label' => Html::img($imgPerfil, ['class' => 'ml-1', "alt" => "Cuenta", "width" => "35", "height" => "30", "title" => "Cuenta", "role" => "img", "style" => "margin: -4px 8px 0 0; border-top-left-radius: 50% 50%;
+                        border-top-right-radius: 50% 50%;
+                        border-bottom-right-radius: 50% 50%;
+                        border-bottom-left-radius: 50% 50%;"]),
+                    'items' => [
+                        ['label' => Yii::$app->user->identity->nombre . ' ' . Yii::$app->user->identity->apellido],
+                        ['label' => 'Mi Perfil', 'url' => ['/cuenta/profile'], 'linkOptions' => ['class' => 'yolo']],
+    
+                        ['label' => 'Organizar Eventos', 'url' => ['/evento/organizar-eventos']],
+
+                        ['label' => 'Mis Inscripciones', 'url' => ['/cuenta/mis-inscripciones-a-eventos']],
+                        
+                        
+                        
+                        
+                        [
+                            "label" => "Cerrar Sesión",
+                            "url" => ["/site/logout"],
+                            "linkOptions" => [
+                                "data-method" => "post",
+                            ]
+                        ],
+                    ],
+                ];
+            }
+
+            
         }
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-collapse justify-content-end'],

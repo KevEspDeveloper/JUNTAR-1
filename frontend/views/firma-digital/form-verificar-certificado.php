@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $model frontend\models\Presentacion */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->title = "Firmar Certificado";
+$this->title = "Verificar Certificado";
 
 ?>
 
@@ -18,7 +18,7 @@ $this->title = "Firmar Certificado";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Firma Digital Certificado</title>
+    <title>Verificación Firma Digital Certificado</title>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,10 +34,11 @@ $this->title = "Firmar Certificado";
 
     <!-- /.container -->
 <div class="container text-center my-5 pt-5">
+    
 
     <div class="card">
             <div class="card-header pinkish_bg">
-                <h2 class="text-center text-white">Firma de un Certificado</h2>
+                <h2 class="text-center text-white">Verificación de un Certificado</h2>
             </div>
             <div class="card-body">
 
@@ -47,22 +48,21 @@ $this->title = "Firmar Certificado";
 
     <!-- begin Formulario -->
 
-                    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']
-                    ]) ?>
+                    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
                     <?= '<div class="form-group">'?>
                     <?= $form->field($model, 'archivo')->fileInput(['class' => 'form-control', 'required' => true]) ?>
                     <?= '</div>' ?>
 
                     <?= '<div class="form-group">'?>
-                    <?= $form->field($model, 'clavePrivada')->fileInput(['class' => 'form-control', 'required' => true]) ?>
+                    <?= $form->field($model, 'sig')->fileInput(['class' => 'form-control', 'required' => true]) ?>
                     <?= '</div>' ?>
 
                     <?= '<div class="form-group">'?>
-                    <?= $form->field($model, 'passClavePrivada')->passwordInput(['class' => 'form-control', 'placeholder' => 'Ingrese la contraseña de la clave privada (si no tiene contraseña, deje vacío este campo).']) ?>
+                    <?= $form->field($model, 'clavePublica')->fileInput(['class' => 'form-control', 'required' => true]) ?>
                     <?= '</div>' ?>
 
-                    <?= Html::submitInput('Firmar Certificado', ['class' => 'btn btn-default my-5 py-3']) ?>
+                    <?= Html::submitInput('Verificar Certificado', ['class' => 'btn btn-default my-2 py-3']) ?>
 
                     <?php ActiveForm::end() ?>
                     <!-- fin Formulario -->
@@ -70,18 +70,7 @@ $this->title = "Firmar Certificado";
 
                     <p class="text-center">
                         <?php 
-                        if (isset($msg)) {
-                            if (isset($msg['sig'])) { ?>
-                                <?= Html::a(' <i class="material-icons" style="padding-top:7px; padding-right: 5px;">get_app</i>¡Descargue su certificado!', [$msg['sig']], ['class' => 'text-light btn my-2']) ?>
-                            <?php
-                            }
-                        ?>
-
-                        
-                        <?= Html::a(' <i class="material-icons" style="padding-top:7px; padding-right: 5px;">picture_as_pdf</i>Archivo Original', [$msg['archivo']], ['class' => 'text-light btn  my-2']) ?>
-                        
-                        <?php
-                        }
+                        echo $msg;
                         ?>   
                     </p>
 
@@ -91,6 +80,7 @@ $this->title = "Firmar Certificado";
             </div>
             </div>
     </div>
+
     <div class="container text-center my-3">
         <?= Html::a(' <i class="material-icons" style="padding-top:7px; padding-right: 5px;">picture_as_pdf</i>Instructuvo para el Usuario', '../certificados/Firma-Digital-en-Juntar.pdf', ['class' => 'text-light btn my-2']) ?>
     </div>
