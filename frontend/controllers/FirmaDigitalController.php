@@ -130,9 +130,10 @@ class FirmaDigitalController extends \yii\web\Controller
                 fclose($publicKey1);
                 //echo "archivo: ".$publicKey."<br>";        
             
-                $starttime_ver = microtime();
+                /*$starttime_ver = microtime();
                 $startarray_ver = explode(" ", $starttime_ver);
-                $starttime_ver = $startarray_ver[1] + $startarray_ver[0];
+                $starttime_ver = $startarray_ver[1] + $startarray_ver[0];*/
+
                 if ($Libreria->verificarFirma($binari, $fileIn, $publicKey)) {
                     $msg = " <div class='alert alert-success py-5' role='alert'>
                     <strong>¡Legítimo!</strong> El certificado es auténtico.

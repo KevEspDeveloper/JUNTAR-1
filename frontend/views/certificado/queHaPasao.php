@@ -189,8 +189,8 @@ use yii\helpers\Html;
         </p>
 
         <p class="text-right">
-            Mmm yo me quedo... y no sé qué haré de ahora en más. Tendrá muchas consecuencias el no aprobar esta materia,<br>
-             como perder la beca económica y un retraso de 1 año en la carrera. Y no sé en qué podría trabajar para tener algo de dinero. <br>
+            Mmm yo me quedo... y no sé qué haré de ahora en más. Tendrá muchas consecuencias el no aprobar las materias,<br>
+             como perder la beca económica y retrasos en la carrera que suponen mucho tiempo. Y no sé en qué podría trabajar para tener algo de dinero. <br>
             Es muy complicado... Mi familia no es que esté en la mejor situación tampoco. 
         </p>
 
