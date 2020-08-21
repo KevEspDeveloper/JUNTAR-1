@@ -230,25 +230,6 @@ class CertificadoController extends Controller
             ]);
         }
     }
-
-
-    /**
-     * 2020
-     * Vista del dialogo easter egg
-     */
-    public function actionQueHaPasao($fecha = null, $nombre = null, $model = null)
-    {
-
-        /* 1) Descomentar $nombre = 'rosecrimson' para ver el dialogo en la página */
-        //$nombre = 'rosecrimson';
-        $fecha = "09/agosto/2020";
-
-        /* 2) Descomentar el segundo retorno para que lleve a la página correcta. Luego comentar el primero. */
-        return $this->render('../site/about');
-        //return $this->render('/certificado/queHaPasao', ['fecha' => $fecha, 'nombre' => $nombre]);
-    }
-
-    
 }
 
 ?>
